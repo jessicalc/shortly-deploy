@@ -2,15 +2,31 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+
     concat: {
+      library: {
+        src: [
+          'public/lib/jquery.js', // all library files. These have to be in order. 
+          'public/lib/underscore.js',
+          'public/lib/backbone.js',
+          'public/lib/handlebars.js'
+        ],
+        dest: 'public/dist/library.js'
+      },
+      views : {
+        src: [
+          'public/client/*.js'
+        ],
+        dest: 'public/dist/views.js'
+      }
     },
 
-    mochaTest: {
+    mochaTest: {  
       test: {
         options: {
           reporter: 'spec'
         },
-        src: ['test/**/*.js']
+        src: ['test/ServerSpec.js']
       }
     },
 
@@ -21,6 +37,7 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+
     },
 
     jshint: {
@@ -91,10 +108,14 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
-    'mochaTest'
+    'mochaTest',
+    'jshint'
   ]);
 
   grunt.registerTask('build', [
+    'concat',
+    // 'cssmin',
+    // 'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
