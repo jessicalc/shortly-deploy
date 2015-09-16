@@ -65,7 +65,11 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-        // Add filespec list here
+        styles: {
+          files: {
+            'public/dist/styles.css': 'public/style.css'
+          }
+        }
     },
 
     watch: {
@@ -124,7 +128,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'concat',
-    // 'cssmin',
+    'cssmin',
     'uglify'
   ]);
 
