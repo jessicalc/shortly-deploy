@@ -3,21 +3,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    concat: {
+    concat: { 
       library: {
-        src: [
-          'public/lib/jquery.js', // all library files. These have to be in order. 
-          'public/lib/underscore.js',
-          'public/lib/backbone.js',
-          'public/lib/handlebars.js'
-        ],
-        dest: 'public/dist/library.js'
+        files: {
+          'public/dist/library.js': [ 'public/lib/jquery.js', 'public/lib/underscore.js', 'public/lib/backbone.js', 'public/lib/handlebars.js' ]  
+        },
       },
       views : {
-        src: [
-          'public/client/*.js'
-        ],
-        dest: 'public/dist/views.js'
+        files: {
+          'public/dist/views.js': 'public/client/*.js'
+        },
       }
     },
 
@@ -37,6 +32,21 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      options: {
+        compress: {},
+        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
+            '<%= grunt.template.today("yyyy-mm-dd") %> */'
+      },
+      library: {
+        files: {
+          'public/dist/library.min.js': 'public/dist/library.js'
+        },
+      },
+      views: {
+        files: {
+          'public/dist/views.min.js': 'public/dist/views.js'
+        }
+      }
 
     },
 
@@ -115,7 +125,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', [
     'concat',
     // 'cssmin',
-    // 'uglify'
+    'uglify'
   ]);
 
   grunt.registerTask('upload', function(n) {
