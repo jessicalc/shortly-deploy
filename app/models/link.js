@@ -10,6 +10,7 @@ var urlSchema = mongoose.Schema({
   base_url: String,
   code: String,
   title: String, 
+  image_uri: String,
   visits: {
     type: Number,
     default: 0
