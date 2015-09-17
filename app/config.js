@@ -3,7 +3,8 @@ var path = require('path');
 // mongoose.connect(uri, options);
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/shortlydb');
+var mongoUri = process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/shortlydb';
+mongoose.connect(mongoUri);
 mongoose.set('debug', true);
 
 var db = mongoose.connection;
