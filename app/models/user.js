@@ -13,10 +13,8 @@ var userSchema = mongoose.Schema({
 
 userSchema.pre('save', function(next) {
   var user = this;
-
   bcrypt.hash(user.password, null, null, function(err, hash) {
     if (err) return next(err); 
-
     user.password = hash;
     next();
   })
@@ -31,11 +29,4 @@ userSchema.methods.comparePassword = function(attemptedPassword, callback) {
 
 var User = mongoose.model('User', userSchema);
 
-
 module.exports = User;
-
-var jess = new User({username: 'jess', password: 'c'});
-jess.save(function(err, result) {
-  if (err) return console.error(err);
-  console.log(result);
-});

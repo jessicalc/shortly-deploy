@@ -4,7 +4,7 @@ var path = require('path');
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/shortlydb');
-console.log("hello?");
+mongoose.set('debug', true);
 
 var db = mongoose.connection;
 
