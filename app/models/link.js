@@ -27,11 +27,3 @@ urlSchema.pre('save', function(next) {
 var Link = mongoose.model('Link', urlSchema);
 
 module.exports = Link;
-
-
-
-var newLink = new Link({url: 'https://reddit.com', title: 'reddit', base_url: 'https://reddit.com'});
-newLink.save(function(err, result) {
-  if (err) return console.error(err);
-  console.log(result);
-});
